@@ -1,5 +1,3 @@
-[README.md](https://github.com/user-attachments/files/33581803/README.md)
-
 # Mortgage Early-Warning Pipeline
 
 **Databricks · PySpark · Delta Lake · Spark ML · SQL dashboards**
