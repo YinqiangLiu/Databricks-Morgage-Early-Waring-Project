@@ -1,0 +1,13 @@
+population,risk_band,loan_month_observations,event_observations,estimated_risk_pct,observed_event_rate_pct,gap_percentage_points,risk_order,model_version,calibration_version,test_start_month,test_end_month,rate_decimal_places,source_type
+All eligible loans,0.2% to below 0.5%,2480008,5250,0.337,0.212,0.125,2,gbt_v1,gbt_v1_calibration_v1,2024-01-01,2025-03-01,3,screenshot_transcription
+All eligible loans,0.5% to below 1%,643249,5691,0.664,0.885,-0.221,3,gbt_v1,gbt_v1_calibration_v1,2024-01-01,2025-03-01,3,screenshot_transcription
+All eligible loans,1% to below 2%,130045,2900,1.267,2.23,-0.963,4,gbt_v1,gbt_v1_calibration_v1,2024-01-01,2025-03-01,3,screenshot_transcription
+All eligible loans,2% to below 5%,14166,1107,3.186,7.814,-4.628,5,gbt_v1,gbt_v1_calibration_v1,2024-01-01,2025-03-01,3,screenshot_transcription
+All eligible loans,5% to below 10%,9580,1362,7.274,14.217,-6.943,6,gbt_v1,gbt_v1_calibration_v1,2024-01-01,2025-03-01,3,screenshot_transcription
+All eligible loans,10% or more,29917,8874,34.621,29.662,4.959,7,gbt_v1,gbt_v1_calibration_v1,2024-01-01,2025-03-01,3,screenshot_transcription
+Current status 00,0.2% to below 0.5%,2480008,5250,0.337,0.212,0.125,2,gbt_v1,gbt_v1_calibration_v1,2024-01-01,2025-03-01,3,screenshot_transcription
+Current status 00,0.5% to below 1%,643249,5691,0.664,0.885,-0.221,3,gbt_v1,gbt_v1_calibration_v1,2024-01-01,2025-03-01,3,screenshot_transcription
+Current status 00,1% to below 2%,130039,2900,1.267,2.23,-0.963,4,gbt_v1,gbt_v1_calibration_v1,2024-01-01,2025-03-01,3,screenshot_transcription
+Current status 00,2% to below 5%,13832,1061,3.161,7.671,-4.51,5,gbt_v1,gbt_v1_calibration_v1,2024-01-01,2025-03-01,3,screenshot_transcription
+Current status 00,5% to below 10%,5654,751,6.859,13.283,-6.423,6,gbt_v1,gbt_v1_calibration_v1,2024-01-01,2025-03-01,3,screenshot_transcription
+Current status 00,10% or more,2226,395,14.301,17.745,-3.444,7,gbt_v1,gbt_v1_calibration_v1,2024-01-01,2025-03-01,3,screenshot_transcription
