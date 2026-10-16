@@ -1,5 +1,5 @@
 # Mortgage Early-Warning Project
-- ** View the Dashboard the link is:https://dbc-b3cfbe68-f849.cloud.databricks.com/dashboardsv3/01f1c8280d7f17a29c530050b60c3287/published?o=7474653100071387
+- View the Dashboard the link is:https://dbc-b3cfbe68-f849.cloud.databricks.com/dashboardsv3/01f1c8280d7f17a29c530050b60c3287/published?o=7474653100071387
   
 - **Purpose:** Identify loans at risk of serious delinquency or REO within the next 12 months.
 
