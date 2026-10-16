@@ -14,4 +14,4 @@
 
 - **Reproduction:** Data access, environment and package versions, notebook execution order, model training, and job configuration.
 
-- **Screenshots:** Portfolio overview, risk distribution, loan review queue, model performance, calibration, and the successful scoring job.
+- **Screenshots:** Pipeline structure, Portfolio overview, risk distribution, loan review queue, model performance, calibration, and the successful scoring job.
