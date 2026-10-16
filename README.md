@@ -1,4 +1,4 @@
-Purpose: identify loans at risk of serious delinquency within 12 months.
+Purpose: identify loans at risk of serious delinquency within 12 months.\\
 Data: Freddie Mac 2016–2025 origination samples and available performance history.
 Pipeline: Bronze → Silver → Gold → modelling → monthly scoring → dashboard.
 Evaluation: chronological splits, comparison with logistic regression, and a monthly 5% review budget.
