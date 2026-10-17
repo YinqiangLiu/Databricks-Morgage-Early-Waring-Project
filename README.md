@@ -27,7 +27,7 @@ Metrics are aggregated from monthly counts across **3,306,965 loan-month observa
 
 ## Data and modeling
 
-The project uses Freddie Mac's **2016–2025 origination samples**, retaining their available monthly performance history through **March 2026**.
+The project uses Freddie Mac's **2016–2025 origination samples**, retaining their available monthly performance history through **March 2026**. The counts and model results below describe the data snapshot used for the saved **v1 experiment**.
 
 | Dataset | Size |
 | --- | ---: |
@@ -35,8 +35,8 @@ The project uses Freddie Mac's **2016–2025 origination samples**, retaining th
 | Monthly performance records | 20,079,736 |
 | Eligible monthly feature records | 16,407,101 |
 
-- **Data quality:** Validate source-file coverage, record structure, missing keys, duplicate loan-month keys, numeric and date conversions, and origination/performance matches. Preserve raw lines and source metadata for traceability.
-- **Features:** Combine origination characteristics with calendar-based three- and six-month payment histories, loan age, balance ratios, rate changes, and estimated LTV. Features use information available through the prediction month.
+- **Data quality:** Validate source-file coverage, record structure, missing keys, duplicate loan and loan-month keys, numeric and date conversions, and performance-to-origination matches. Required checks stop processing when they fail. Preserve raw lines and source metadata in Bronze for traceability.
+- **Features:** Combine origination characteristics with calendar-based three- and six-month payment histories, loan age, balance ratios, rate changes, and estimated LTV. Payment-history windows use reporting months through the prediction month.
 - **Target:** An observed 90+ day delinquency or REO event in the following 12 months. Verified payoffs without an earlier event can receive a negative label; unresolved outcomes remain missing and are excluded from supervised modeling.
 - **Preprocessing:** Fit imputation and categorical encoding on training data. Apply the fitted transformations to validation, test, and scoring data.
 - **Model selection:** Compare logistic regression, 50- and 100-tree Spark GBT models, and a native XGBoost challenger. Select the 50-tree GBT using validation results before final test evaluation.
@@ -65,7 +65,9 @@ The five-task Databricks job processes uploaded source files, scores the latest 
 
 Each downstream task requires its predecessor to succeed. The exported job is configured to run on the **first day of each month at 6 AM, America/Toronto**, with a maximum of one concurrent run.
 
-This is a **full-refresh batch workflow**: source downloads and uploads are manual, and the complete source history must remain available. Model training is a separate workflow. Scoring reruns replace the matching month's model/calibration output rather than accumulating duplicate scores.
+This is a **full-refresh batch workflow**: source downloads and uploads are manual, and the complete source history must remain available. Notebooks 01–03 rebuild the Bronze, Silver, and Gold Delta tables on each run. Gold validation checks key uniqueness, label values, outcome dates, and row-count consistency without requiring fixed historical counts.
+
+Model training is a separate workflow. Monthly scoring loads the saved v1 model and calibrator; it does not retrain them. Scoring reruns replace the matching month's model/calibration output rather than accumulating duplicate scores.
 
 The run below demonstrates successful execution of all five tasks. It was launched manually; the monthly schedule is documented in the [job configuration](Jobs%20%26%20Piplines/mortgage_monthly_risk_pipeline.json).
 
@@ -85,10 +87,6 @@ The latest scoring snapshot uses **March 2026 features**. The scoring timestamp 
 
 <details>
 <summary>Data access, execution order, and workspace configuration</summary>
-
-### Export status
-
-The committed job configuration contains the expanded five-task workflow. The current exports of notebooks **01–03** still need to be replaced with the validated workspace versions before this checkout can reproduce the full refresh: the Bronze export is incomplete, and the Silver/Gold exports retain the initial-load save logic.
 
 ### 1. Obtain the source files
 
@@ -114,6 +112,8 @@ Import the notebooks into a Databricks workspace with Unity Catalog volumes and 
 | 08 | Fit and save probability calibration on validation data |
 | 09–11 | Evaluate the held-out test period, compare models, and assess calibration |
 | 12 | Score the selected month using the saved model and calibration artifacts |
+
+For a first reproduction, start without pre-existing project split tables, model files, or prediction tables. The model-development notebooks **04–11** represent the saved v1 experiment and can reuse existing artifacts on later runs. To develop a new model with different training data, feature definitions, or settings, use a consistent new set of artifact names and regenerate the dependent models, calibration, and evaluation results. Automated experiment tracking is future work.
 
 Project tables use `workspace.mortgage_risk`. Model artifacts use:
 
